@@ -1,5 +1,4 @@
 namespace :import do
-
   desc "Import a bunch of hardcoded books into rails db"
   task :all_books => [:environment] do
     books = [
@@ -49,6 +48,35 @@ namespace :import do
         sentence.save
       }
     }
+  end
+
+  desc "Take all the sentences from the db, and put them in elastic search"
+  task :to_elasticsearch => [:environment] do
+    client = Elasticsearch::Client.new log: true
+
+    # delete/wipe any existing index
+    client.indices.delete index: 'publications'
+
+    client.indices.create index: 'publications', body: {
+      mappings: {
+        document: {
+          properties: {
+            text: {
+              type: 'string'
+            },
+            book_title: {
+              type: 'string'
+            }
+          }
+        }
+      }
+    }
+
+    Sentence.all.each{|sentence|
+      client.index index: 'publications', type: 'sentence', id: sentence.id, body: { text: sentence.text, book_title: sentence.publication.title }
+    }
+
+    client.indices.refresh index: 'publications'
 
 
   end
