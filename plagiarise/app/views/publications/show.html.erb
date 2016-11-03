@@ -20,5 +20,11 @@
   <%= @publication.wellcome_id %>
 </p>
 
+<ul>
+  <% for @sentence in @publication.sentences %>
+    <li><%= @sentence.text %></li>
+  <% end %>
+</ul>
+
 <%= link_to 'Edit', edit_publication_path(@publication) %> |
 <%= link_to 'Back', publications_path %>
