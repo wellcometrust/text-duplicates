@@ -7,8 +7,4 @@ class Sentence < ApplicationRecord
 
     return (own_score / maximum) rescue 0
   end
-
-  def css_style
-    return "background-color: rgba(255, 0, 0, 0.5)"
-  end
 end
