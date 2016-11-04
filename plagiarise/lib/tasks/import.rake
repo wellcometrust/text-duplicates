@@ -64,7 +64,10 @@ namespace :import do
             text: {
               type: 'string'
             },
-            book_title: {
+            publication_title: {
+              type: 'string'
+            },
+            publication_id: {
               type: 'string'
             }
           }
@@ -73,12 +76,37 @@ namespace :import do
     }
 
     Sentence.all.each{|sentence|
-      client.index index: 'publications', type: 'sentence', id: sentence.id, body: { text: sentence.text, book_title: sentence.publication.title }
+      client.index index: 'publications', type: 'sentence', id: sentence.id, body: { text: sentence.text, publication_title: sentence.publication.title, publication_id: sentence.publication.id }
     }
 
     client.indices.refresh index: 'publications'
 
-
   end
 
+
+  desc "For each sentence, use elasticsearch to find similar sentences"
+  task :build_elasticsearch_relations => [:environment] do
+    client = Elasticsearch::Client.new log: true
+    Sentence.all.each{|sentence|
+      result = client.search index: 'publications', body: {
+        query: {
+          bool: {
+            must: [{
+              match: {
+                text: sentence.text
+              }
+            }],
+            must_not: [{
+              match: {
+                publication_id: sentence.publication.id
+              }
+            }]
+          }
+        }
+      }
+
+      sentence.max_score = result["hits"]["max_score"]
+      sentence.save
+    }
+  end
 end

@@ -22,7 +22,7 @@
 
 <ul>
   <% for @sentence in @publication.sentences %>
-    <li><%= @sentence.text %></li>
+    <li name=<%= @sentence.id %> style="background-color: rgba(<%= @sentence.percentage_max_score > 0.5 ? 255 : 0 %>, <%= @sentence.percentage_max_score > 0.5 ? 251 : 0 %>, <%= @sentence.percentage_max_score > 0.5 ? 204 : 0 %>, <%= @sentence.percentage_max_score > 0.5 ? (@sentence.percentage_max_score-0.5)*2 : 0 %>);"><%= @sentence.text %> (<%= '%.1f' % (@sentence.percentage_max_score*100) %>%)</li>
   <% end %>
 </ul>
 
