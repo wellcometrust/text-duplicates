@@ -1,4 +1,8 @@
 namespace :import do
+
+  desc "Run all tasks, to take us from an empty db to all the things populated"
+  task :all => [:all_books, :to_elasticsearch, :build_elasticsearch_relations, :build_max_score]
+
   desc "Import a bunch of hardcoded books into rails db"
   task :all_books => [:environment] do
     books = [
@@ -36,6 +40,7 @@ namespace :import do
       publication.author = book[:author]
       publication.year = book[:year]
       publication.wellcome_id = book[:wellcome_id]
+      publication.original_url = book[:original_source]
       publication.save
 
       book_text = File.read(book[:text_file])
@@ -132,7 +137,7 @@ namespace :import do
 
       publication.max_score = publication.sentences.where.not('max_score' => nil).order("max_score DESC").first.max_score
       publication.save
-      
+
     }
 
   end
