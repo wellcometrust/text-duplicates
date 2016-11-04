@@ -29,6 +29,30 @@ namespace :import do
         :wellcome_id => "",
         :text_file => "../books/first_test/nervous.txt",
         :original_source => "https://archive.org/details/b20391894"
+      },
+      {
+        :title => "Brodie's medical work on virility",
+        :author => "R.J. Brodie (and co.)",
+        :year => "1843",
+        :wellcome_id => "",
+        :text_file => "../books/second_batch/brodie.txt",
+        :original_source => "https://books.google.co.uk/books?id=WcgDAAAAQAAJ&dq=brodie%27s+virility&source=gbs_navlinks_s"
+      },
+      {
+        :title => "A practical treatise on the prevention and cure of the venereal disease; particularly its consequences ... in which a mild and successful mode of treatment is pointed out",
+        :author => " Caton, T. M. (Thomas Mott)",
+        :year => "1809",
+        :wellcome_id => "b22033294",
+        :text_file => "../books/second_batch/caton.txt",
+        :original_source => "https://archive.org/details/b22033294"
+      },
+      {
+        :title => "The student's manual of venereal diseases : being a concise description of those affections and of their treatment",
+        :author => " Hill, Berkeley, 1834-1892; Cooper, Arthur; University of Leeds. Library",
+        :year => "1878",
+        :wellcome_id => "b21516996",
+        :text_file => "../books/second_batch/hill.txt",
+        :original_source => "https://archive.org/details/b21516996"
       }
     ]
 
