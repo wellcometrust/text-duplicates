@@ -17,7 +17,9 @@
 
 <p>
   <strong>Wellcome:</strong>
-  <%= @publication.wellcome_id %>
+  <% if !@publication.wellcome_id.empty? %>
+    <%= link_to @publication.wellcome_id, "http://wellcomelibrary.org/item/" + @publication.wellcome_id %>
+  <% end %>
 </p>
 
 <ul>

@@ -19,7 +19,11 @@
         <td><%= link_to publication.title, publication %></td>
         <td><%= publication.author %></td>
         <td><%= publication.year %></td>
-        <td><%= publication.wellcome_id %></td>
+        <td>
+          <% if !publication.wellcome_id.empty? %>
+            <%= link_to publication.wellcome_id, "http://wellcomelibrary.org/item/" + publication.wellcome_id %>
+          <% end %>
+        </td>
         <td><%= link_to 'Source', publication.original_url %></td>
       </tr>
     <% end %>
