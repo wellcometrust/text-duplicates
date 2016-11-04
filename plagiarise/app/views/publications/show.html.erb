@@ -21,24 +21,29 @@
 </p>
 
 <ul>
-  <% for @sentence in @publication.sentences.order("id ASC").first %>
+  <% for @sentence in @publication.sentences.order("id ASC") %>
     <li id=<%= @sentence.id %> style="background-color: rgba(<%= @sentence.percentage_max_score > 0.5 ? 255 : 0 %>, <%= @sentence.percentage_max_score > 0.5 ? 251 : 0 %>, <%= @sentence.percentage_max_score > 0.5 ? 204 : 0 %>, <%= @sentence.percentage_max_score > 0.5 ? (@sentence.percentage_max_score-0.5)*2 : 0 %>);">
       <%= @sentence.text %>
       (<%= '%.1f' % (@sentence.percentage_max_score*100) %>%)
-      <ul>
-        <% for @similarity in @sentence.similar.order("score DESC") %>
-          <li>
-            <a href="/publications/<%= @similarity.similar.publication_id %>#<%= @similarity.similar_id %>">
-              <%= @similarity.similar.publication.title %>
-            </a>:
-            <blockquote>
-              <%= @similarity.highlight.html_safe %>
-            </blockquote>
-            (<%= '%.1f' % (@similarity.score / @sentence.max_score * (@sentence.percentage_max_score*100) ) %>%)
-            [<%= @similarity.similar_id %>]</a>
-          </li>
-        <% end %>
-      </ul>
+
+      <% if @sentence.percentage_max_score > 0.5 %>
+        <ul>
+          <% for @similarity in @sentence.similar.order("score DESC") %>
+            <% if @similarity.score / @sentence.max_score * @sentence.percentage_max_score > 0.5 %>
+              <li>
+                <a href="/publications/<%= @similarity.similar.publication_id %>#<%= @similarity.similar_id %>">
+                  <%= @similarity.similar.publication.title %>
+                </a>:
+                <blockquote>
+                  <%= @similarity.highlight.html_safe %>
+                </blockquote>
+                (<%= '%.1f' % (@similarity.score / @sentence.max_score * (@sentence.percentage_max_score*100) ) %>%)
+                [<%= @similarity.similar_id %>]</a>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      <% end %>
     </li>
   <% end %>
 </ul>

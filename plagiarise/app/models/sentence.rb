@@ -5,7 +5,8 @@ class Sentence < ApplicationRecord
                                   dependent:   :destroy
 
   def percentage_max_score
-      maximum = self.publication.sentences.where.not('max_score' => nil).order("max_score DESC").first.max_score
+      maximum = self.publication.max_score
+        # self.publication.sentences.where.not('max_score' => nil).order("max_score DESC").first.max_score
       own_score = self.max_score
 
     return (own_score / maximum) rescue 0

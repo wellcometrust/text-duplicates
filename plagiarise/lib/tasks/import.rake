@@ -124,4 +124,16 @@ namespace :import do
       }
     }
   end
+
+  desc "For each publication, calculate max_score"
+  task :build_max_score => [:environment] do
+
+    Publication.all.each{|publication|
+
+      publication.max_score = publication.sentences.where.not('max_score' => nil).order("max_score DESC").first.max_score
+      publication.save
+      
+    }
+
+  end
 end
