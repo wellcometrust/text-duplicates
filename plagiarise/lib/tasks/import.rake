@@ -102,11 +102,26 @@ namespace :import do
               }
             }]
           }
+        },
+        highlight: {
+          fields: {
+            text: {}
+          }
         }
       }
 
       sentence.max_score = result["hits"]["max_score"]
       sentence.save
+
+      result["hits"]["hits"].each{|hit|
+        similarity = Similarity.new
+        similarity.original = sentence
+        similarity.similar = Sentence.find(hit["_id"])
+        similarity.score = hit["_score"]
+        similarity.highlight = hit["highlight"]["text"].join(" ")
+
+        similarity.save
+      }
     }
   end
 end
