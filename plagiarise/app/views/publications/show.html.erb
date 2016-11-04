@@ -35,7 +35,8 @@
                   <%= @similarity.similar.publication.title %>
                 </a>:
                 <blockquote>
-                  <%= @similarity.highlight.html_safe %>
+                  <!--<%= @similarity.highlight.html_safe %>-->
+                  <em><%= @similarity.similar.text %></em>
                 </blockquote>
                 (<%= '%.1f' % (@similarity.score / @sentence.max_score * (@sentence.percentage_max_score*100) ) %>%)
                 [<%= @similarity.similar_id %>]</a>
@@ -47,6 +48,3 @@
     </li>
   <% end %>
 </ul>
-
-<%= link_to 'Edit', edit_publication_path(@publication) %> |
-<%= link_to 'Back', publications_path %>
