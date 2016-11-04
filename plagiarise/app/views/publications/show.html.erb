@@ -24,7 +24,9 @@
   <% for @sentence in @publication.sentences.order("id ASC") %>
     <li id=<%= @sentence.id %> style="background-color: rgba(<%= @sentence.percentage_max_score > 0.5 ? 255 : 0 %>, <%= @sentence.percentage_max_score > 0.5 ? 251 : 0 %>, <%= @sentence.percentage_max_score > 0.5 ? 204 : 0 %>, <%= @sentence.percentage_max_score > 0.5 ? (@sentence.percentage_max_score-0.5)*2 : 0 %>);">
       <%= @sentence.text %>
-      (<%= '%.1f' % (@sentence.percentage_max_score*100) %>%)
+      <% if @sentence.percentage_max_score > 0.5 %>
+        (<%= '%.1f' % (@sentence.percentage_max_score*100) %>%)
+      <% end %>
 
       <% if @sentence.percentage_max_score > 0.5 %>
         <ul>
