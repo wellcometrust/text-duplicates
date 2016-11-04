@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20161103144132) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "publications", force: :cascade do |t|
     t.string   "title"
     t.string   "author"
@@ -27,7 +30,8 @@ ActiveRecord::Schema.define(version: 20161103144132) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.float    "max_score"
-    t.index ["publication_id"], name: "index_sentences_on_publication_id"
+    t.index ["publication_id"], name: "index_sentences_on_publication_id", using: :btree
   end
 
+  add_foreign_key "sentences", "publications"
 end
