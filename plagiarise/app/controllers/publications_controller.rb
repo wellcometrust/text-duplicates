@@ -5,11 +5,13 @@ class PublicationsController < ApplicationController
   # GET /publications.json
   def index
     @publications = Publication.all
+    @title = "Tracing copying & reuse in 19th century sexual health books"
   end
 
   # GET /publications/1
   # GET /publications/1.json
   def show
+    @title = @publication.title + " — tracing copying & reuse in 19th century sexual health books"
   end
 
   # GET /publications/new
