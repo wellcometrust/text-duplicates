@@ -5,10 +5,11 @@ This website is a product of Wellcome Data Week, and can be found at http://ghp.
 This site takes books from the Wellcome Medical Heritage Library and tries to find instances of copying between texts.
 
 This repository features:
-`/books` – various texts used either on the site or during development.
-`/docs` – the website found at http://ghp.wellcomecollection.org/text-duplicates/
-`/misc` – scripts used during exploration and development to understand the texts
-`/plagiarise` – a Ruby on Rails app used to import books, find similarities and browse similarities. 
+
+* `/books` – various texts used either on the site or during development.
+* `/docs` – the website found at http://ghp.wellcomecollection.org/text-duplicates/
+* `/misc` – scripts used during exploration and development to understand the texts
+* `/plagiarise` – a Ruby on Rails app used to import books, find similarities and browse similarities. 
 
 ## Using the Ruby on Rails app
 
