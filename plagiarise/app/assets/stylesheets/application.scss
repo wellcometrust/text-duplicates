@@ -471,10 +471,23 @@ input[type=submit]:focus, input[type=submit]:active {
 }
 
 .footer {
+  font-size: 80%;
   padding-top: 1em;
+  @include span-columns(6);
+  @include shift(2);
+
+  @include media($medium) {
+    @include span-columns(8 of 12);
+  }
+
+  @include media($small) {
+    @include shift(1);
+    @include span-columns(10 of 12);
+  }
 
   @include media($xsmall) {
-    padding-top: 0;
+    @include shift(0);
+    @include span-columns(12 of 12);
   }
 }
 
