@@ -7,18 +7,12 @@
   </head>
 
   <body>
-    <div class="blue-wrapper">
-      <div class="blue">
-        <header class="container">
-          <nav>
-            <ul class="nav">
-              <li><%= link_to 'About', :about %></li>
-              <li><%= link_to 'Browse The Texts', "/#books" %></li>
-            </ul>
-          </nav>
-        </header>
 
-        <%= yield %>
+    <%= yield %>
+
+    <div class="container grey">
+      <div class="row">
+        <p>Created by <a href="http://www.people.hps.cam.ac.uk/index/fellows-associates/bull">Sarah Bull</a> and <a href="http://buckleywilliams.com/">Buckley Williams</a> for The Wellcome Library as part of Wellcome Data Week
       </div>
     </div>
   </body>

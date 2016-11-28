@@ -1,14 +1,27 @@
 
+  <div class="blue-wrapper">
+    <div class="blue">
+      <header class="container">
+        <nav>
+          <ul class="nav">
+            <li><%= link_to 'Browse The Texts', "/#books" %></li>
+            <li><%= link_to 'About', :about %></li>
+
+          </ul>
+        </nav>
+      </header>
         <div class="container">
           <section>
             <div class="row">
-              <h2 class="standfirst">Can we trace copying &amp; reuse in 19th century sexual health books?</h2>
+              <h2 class="standfirst">Can we trace text copying in 19th century sexual health books?</h2>
             </div>
             <div class="row">
               <div class="main">
                 <p class="intro">This is an experiment from <%= link_to "Wellcome Data Week", "http://blog.wellcomelibrary.org/2016/11/meet-the-digital-data-dabblers/" %> to see if we can use software to find how medical writing has been reused, recycled, and reinvented over time.</p>
 
-                <p>We've been using Victorian works about sexual health from the UK Medical Heritage Library as our starting point. <%= link_to "Would you like to know more?", :about %></p>
+                <p>We've been using Victorian works about sexual health from the UK Medical Heritage Library as our starting point.</p>
+
+                <p><%= link_to "Would you like to know more?", :about %></p>
               </div>
             </div>
           </section>
@@ -16,34 +29,17 @@
       </div>
     </div>
 
+    <section class="container">
+      <p class="section-intro" id="books">Browse the texts</p>
+      <hr>
+      <p>These are the texts we've checked for copying so far.</p>
 
+        <% @publications.each do |publication| %>
+          <h3><%= link_to publication.title, publication %></h3>
+        <% end %>
 
+      <hr>
+    </section>
 
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Year</th>
-      <th>Wellcome id</th>
-      <th>Source</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @publications.each do |publication| %>
-      <tr>
-        <td><%= link_to publication.title, publication %></td>
-        <td><%= publication.author %></td>
-        <td><%= publication.year %></td>
-        <td>
-          <% if !publication.wellcome_id.empty? %>
-            <%= link_to publication.wellcome_id, "http://wellcomelibrary.org/item/" + publication.wellcome_id %>
-          <% end %>
-        </td>
-        <td><%= link_to 'Source', publication.original_url %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  </div>
+</div>

@@ -103,6 +103,12 @@ section {
       border-bottom: 1px solid $blue;
     }
   }
+
+  .nav {
+    a {
+      color: white;
+    }
+  }
 }
 
 .turquoise {
@@ -182,6 +188,7 @@ header {
 }
 
 nav {
+  color: $blue;
   text-align: right;
   margin-top: 1em;
   margin-bottom: 1em;
@@ -207,7 +214,6 @@ nav {
 
   a {
     padding: 0.3em;
-    color: white;
     border-bottom: 1px solid transparent;
     &:hover {
       border-bottom: 1px solid $blue;
@@ -595,5 +601,24 @@ nav {
 
   @include media($xsmall) {
     @include span-columns(6 of 6);
+  }
+}
+
+.text-block {
+  @include span-columns(6);
+  @include shift(2);
+
+  @include media($medium) {
+    @include span-columns(8 of 12);
+  }
+
+  @include media($small) {
+    @include shift(1);
+    @include span-columns(10 of 12);
+  }
+
+  @include media($xsmall) {
+    @include shift(0);
+    @include span-columns(12 of 12);
   }
 }
